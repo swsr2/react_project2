@@ -1,0 +1,75 @@
+body{
+  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0ieApEihlH6QHE0XNsirD9xUJDiuKDa8phA&s);
+  height:100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* 열정렬렬 */
+  flex-direction: column; 
+}
+.weather-box{
+  border: 5px solid white;
+  padding: 100px;
+  border-radius: 30px;
+  background-color: azure;
+}
+.weather-box:hover {
+  transform: scale(1.03);
+}
+
+.weather-box div {
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.weather-box h2 {
+  font-size: 48px;
+  margin: 10px 0;
+  font-weight: 700;
+  color: #007bff; /* Blue temperature text */
+}
+
+.weather-box h3 {
+  font-size: 18px;
+  color: #666;
+  text-transform: capitalize;
+}
+
+/* Default button styles */
+.btn {
+  margin: 5px; /* Default spacing */
+  color: #000; /* Text color */
+  border: none;
+  padding: 8px 12px;
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+  .weather-box {
+    width: 90%;
+  }
+
+  .weather-button-container button {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .weather-box {
+    width: 100%;
+  }
+
+  .weather-button-container button {
+    width: 80px;
+    font-size: 14px;
+  }
+}
