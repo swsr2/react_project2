@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import WeatherBox from './component/WeatherBox';
 import WeatherButton from './component/WeatherButton';
@@ -70,16 +70,22 @@ function App() {
 
   return (
     <div>
-      {loading ? <div className='container'><ClipLoader
-        color="#f88c6b"
-        loading={loading}
-        size={150}
-      /></div> : <div className='container'>
-
-        <WeatherBox weather={weather} />
-        {/* 함수도 넘길수 있음 */}
-        <WeatherButton cities={cities} setCity={setCity} getCurrentLocation={getCurrentLocation} />
-      </div>}
+      {loading ? (
+        <div className="w-100 vh-100 d-flex justify-content-center align-items-center">
+          <ClipLoader color="#f86c6b" size={150} loading={loading} />
+        </div>
+      ) : !apiError ? (
+        <div class="container">
+          <WeatherBox weather={weather} />
+          <WeatherButton
+            cities={cities}
+            getCurrentLocation={getCurrentLocation}
+            setCity={setCity}
+          />
+        </div>
+      ) : (
+        apiError
+      )}
     </div>
 
   );
