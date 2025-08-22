@@ -1,72 +1,70 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import WeatherBox from './component/WeatherBox';
-import WeatherButton from './component/WeatherButton';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Form, Button } from "react-bootstrap";
+import WeatherBox from "./component/WeatherBox";
 import ClipLoader from "react-spinners/ClipLoader";
-//1. 앱이실행되자마자 현재 위치 기반 날씨(도시,섭씨,화씨,상태)
-//2. 다른 지역 버튼(1개는 현재, 나머지는 다른도시)
-//3. 버튼을 누르면 다른 위치 날씨 보인다 
-//4. 현재위치 버튼누르면 다시 현재위치기반의 날씨가 보인다.
-//5. 데이터 버퍼링시 로딩스피너 돈다. 
 
-const API_KEY = '62ea77f7fa18b4a59c6a0f031c0ae87c'
+const API_KEY = "62ea77f7fa18b4a59c6a0f031c0ae87c";
 
 function App() {
-  const [weather, setWeather] = useState(null)
-  const [city, setCity] = useState('') //부모가 모든 state 가지고있는다
-  const [loading, setLoading] = useState(false)
+  const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [apiError, setAPIError] = useState("");
-  const cities = ['Tokyo', 'Switzerland', 'Cancun', 'New york']
+  const [cityInput, setCityInput] = useState("");
 
-
-  // 현재위치 
   const getCurrentLocation = () => {
+    setLoading(true);
     navigator.geolocation.getCurrentPosition((position) => {
-      let lat = position.coords.latitude
-      let lon = position.coords.longitude;
-      getWeatherByCurrentLocation(lat, lon)
+      const { latitude, longitude } = position.coords;
+      getWeatherByCurrentLocation(latitude, longitude);
     });
-  }
+  };
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
     try {
-      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
-      setLoading(true)
-      const response = await fetch(url)
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+      const response = await fetch(url);
       const data = await response.json();
-      // console.log("ddd", data)
-      setWeather(data)
-      setLoading(false)
+      setWeather(data);
+      setAPIError("");
+      setLoading(false);
     } catch (err) {
-      setAPIError(err.message)
-      setLoading(false)
+      setAPIError(err.message);
+      setLoading(false);
     }
-  }
+  };
 
-  const getWeatherByCity = async () => {
+  const getWeatherByCity = async (cityName) => {
+    setLoading(true);
     try {
-      let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
-      setLoading(true)
-      const response = await fetch(url)
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
+      const response = await fetch(url);
       const data = await response.json();
-      console.log("새로운위치", data)
-      setWeather(data)
-      setLoading(false)
+      if (data.cod === "404") {
+        setAPIError(`'${cityName}' is not a valid city.`);
+        setWeather(null);
+      } else {
+        setWeather(data);
+        setAPIError("");
+      }
+      setLoading(false);
     } catch (err) {
-      setAPIError(err.message)
-      setLoading(false)
+      setAPIError(err.message);
+      setLoading(false);
     }
-  }
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (cityInput) {
+      getWeatherByCity(cityInput);
+    }
+  };
+
   useEffect(() => {
-    if (city == "") {
-      setLoading(true)
-      getCurrentLocation()
-    } else {
-      setLoading(true)
-      getWeatherByCity()
-    }
-  }, [city])
+    getCurrentLocation();
+  }, []);
 
   return (
     <div>
@@ -74,20 +72,39 @@ function App() {
         <div className="w-100 vh-100 d-flex justify-content-center align-items-center">
           <ClipLoader color="#f86c6b" size={150} loading={loading} />
         </div>
-      ) : !apiError ? (
-        <div class="container">
-          <WeatherBox weather={weather} />
-          <WeatherButton
-            cities={cities}
-            getCurrentLocation={getCurrentLocation}
-            setCity={setCity}
-          />
-        </div>
       ) : (
-        apiError
+        <div className="container">
+          <div className="search-container">
+            <Form onSubmit={handleSearch} className="d-flex w-100">
+              <Form.Control
+                type="text"
+                placeholder="도시를 입력하세요"
+                value={cityInput}
+                onChange={(e) => setCityInput(e.target.value)}
+                className="me-2"
+              />
+              <Button variant="primary" type="submit" className="search-button ">
+                검색
+              </Button>
+              <Button
+                variant="info"
+                onClick={getCurrentLocation}
+                className="text-white current-location-button"
+              >
+                현재 위치
+              </Button>
+            </Form>
+          </div>
+          <div className="weather-app-container">
+            {weather ? (
+              <WeatherBox weather={weather} />
+            ) : (
+              apiError && <div className="error-message">{apiError}</div>
+            )}
+          </div>
+        </div>
       )}
     </div>
-
   );
 }
 

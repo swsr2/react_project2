@@ -1,6 +1,6 @@
-body{
+body {
   background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0ieApEihlH6QHE0XNsirD9xUJDiuKDa8phA&s);
-  height:100vh;
+  height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -10,17 +10,30 @@ body{
   justify-content: center;
   align-items: center;
   height: 100vh;
-  /* 열정렬렬 */
-  flex-direction: column; 
+  flex-direction: column;
 }
-.weather-box{
+
+.weather-app-container,
+.search-container {
+  width: 90%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+.weather-app-container {
   border: 5px solid white;
-  padding: 100px;
+  padding: 40px;
   border-radius: 30px;
-  background-color: azure;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: transform 0.3s ease;
 }
-.weather-box:hover {
+
+.weather-app-container:hover {
   transform: scale(1.03);
+}
+
+.weather-box {
+  text-align: center;
 }
 
 .weather-box div {
@@ -34,7 +47,7 @@ body{
   font-size: 48px;
   margin: 10px 0;
   font-weight: 700;
-  color: #007bff; /* Blue temperature text */
+  color: #007bff;
 }
 
 .weather-box h3 {
@@ -43,33 +56,44 @@ body{
   text-transform: capitalize;
 }
 
-/* Default button styles */
-.btn {
-  margin: 5px; /* Default spacing */
-  color: #000; /* Text color */
-  border: none;
-  padding: 8px 12px;
-  transition: all 0.3s ease; /* Smooth transition */
+.search-container {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
 }
 
-/* === Responsive Design === */
-@media (max-width: 768px) {
-  .weather-box {
-    width: 90%;
-  }
+.search-button,
+.current-location-button {
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin-right: 5px;
+}
 
-  .weather-button-container button {
-    width: 100px;
+.error-message {
+  text-align: center;
+  color: #d9534f; /* Bootstrap's danger color */
+  font-size: 1.2rem;
+  padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .weather-app-container {
+    padding: 30px;
+  }
+  .weather-box h2 {
+    font-size: 38px;
   }
 }
 
 @media (max-width: 480px) {
-  .weather-box {
-    width: 100%;
+  .weather-app-container,
+  .search-container {
+    flex-direction: column;
+    gap: 10px;
   }
-
-  .weather-button-container button {
-    width: 80px;
-    font-size: 14px;
+  .weather-box h2 {
+    font-size: 32px;
   }
 }
