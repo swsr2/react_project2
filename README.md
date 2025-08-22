@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# 위치 기반 날씨 앱 (Location-Based Weather App)
+이 프로젝트는 사용자의 현재 위치 또는 검색한 도시의 날씨 정보를 보여주는 간단한 React 애플리케이션입니다.
+배포링크 : https://locationbased-weather.netlify.app/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ✨ 주요 기능
+- **현재 위치 날씨**: 앱 실행 시 사용자의 현재 위치를 기반으로 날씨 정보를 가져와 표시합니다.
+- **도시 검색**: 사용자가 원하는 도시의 이름을 입력하여 해당 도시의 날씨를 검색할 수 있습니다.
+- **로딩 상태 표시**: 날씨 데이터를 불러오는 동안 로딩 스피너를 표시하여 사용자 경험을 향상시킵니다.
+- **에러 처리**: 유효하지 않은 도시 이름을 검색할 경우 에러 메시지를 표시합니다.
 
-## Available Scripts
+## 🔧 사용된 기술
 
-In the project directory, you can run:
+- React
+- Bootstrap for React
+- React Spinners
+- OpenWeatherMap API
 
-### `npm start`
+## 🚀 실행 방법
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1.  **저장소 복제**:
+    ```bash
+    git clone <repository-url>
+    ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2.  **프로젝트 디렉토리로 이동**:
+    ```bash
+    cd project2
+    ```
 
-### `npm test`
+3.  **필요한 패키지 설치**:
+    ```bash
+    npm install
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+4.  **애플리케이션 실행**:
+    ```bash
+    npm start
+    ```
