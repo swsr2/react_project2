@@ -1,6 +1,7 @@
 # 위치 기반 날씨 앱 (Location-Based Weather App)
 이 프로젝트는 사용자의 현재 위치 또는 검색한 도시의 날씨 정보를 보여주는 간단한 React 애플리케이션입니다.
-배포링크 : https://locationbased-weather.netlify.app/
+
+🔗 배포링크 : https://locationbased-weather.netlify.app/
 
 ## ✨ 주요 기능
 - **현재 위치 날씨**: 앱 실행 시 사용자의 현재 위치를 기반으로 날씨 정보를 가져와 표시합니다.
